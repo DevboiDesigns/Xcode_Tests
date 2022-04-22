@@ -66,6 +66,11 @@
 * function naming convention `test_`
 * name will generate a diamond with play button next to test function 
 
+## Unit Testing 
+* domain focused 
+
+[Files](TipCalculator_Test/TipCalculator_TestTests/TipCalculator_TestTests.swift)
+
 ```swift
 func test_add_two_numbers() {
         
@@ -102,8 +107,6 @@ class when_calculating_tip_based_on_total_amount: XCTestCase {
 }
 ```
 
-[Files](TipCalculator_Test/TipCalculator_TestTests/TipCalculator_TestTests.swift)
-
 ```swift
 class when_calculating_tip_based_on_total_amount: XCTestCase {
 
@@ -128,4 +131,89 @@ class when_calculating_tip_based_on_negative_total_amount: XCTestCase {
         
     }
 }
+```
+
+## UI Testing 
+* normally run over night because they take a long time to run 
+
+* `XCUIApplication` - whole app
+
+[Files](TipCalculator_Test/TipCalculator_TestUITests/TipCalculator_TestUITests.swift)
+
+```swift
+func test_should_make_sure_that_the_total_textfield_contains_default_value() {
+       
+       //MARK: XCUIApplication - app
+       let app = XCUIApplication()
+       continueAfterFailure = false
+       app.launch()
+       
+       let totalTextField = app.textFields["totalTextField"]
+       
+       // will check inital value of text field
+       XCTAssertEqual(totalTextField.value as! String, "Enter total")
+}
+```
+
+**add accessibility label** 
+```swift
+TextField("Enter total", text: $total)
+    .textFieldStyle(.roundedBorder)
+    .accessibilityLabel("totalTextField")
+```
+
+## getting access to elements in view
+
+```swift
+func test_should_make_sure_20percent_default_tip_option_selected() {
+     let app = XCUIApplication()
+     continueAfterFailure = false
+     app.launch()
+     
+     let tipPercentagePicker = app.segmentedControls["tipPercentagePicker"]
+     let pickerButton = tipPercentagePicker.buttons.element(boundBy: 1)
+     XCTAssertEqual(pickerButton.label, "20%")
+     // checks if currently selected
+     XCTAssertTrue(pickerButton.isSelected)
+
+}
+```
+
+## Config each test
+
+**runs before every test**
+```swift
+private var app: XCUIApplication!
+    override func setUp() {
+        app = XCUIApplication()
+        continueAfterFailure = false
+        app.launch()
+    }
+```
+
+**runs after each test**
+```swift
+override func tearDown() {
+    
+}
+```
+
+## Click events 
+
+```swift
+// access element
+let totalTextField = app.textFields["totalTextField"]
+//tap textfield
+totalTextField.tap()
+//type text in text field
+totalTextField.typeText("100")
+//access element
+let calculateTipButton = app.buttons["calculateTipButton"]
+//tap button
+calculateTipButton.tap()
+// for basic text label - staticText
+let tipText = app.staticTexts["tipText"]
+// will wait for text to be updated - needed
+let _ = tipText.waitForExistence(timeout: 0.5)
+XCTAssertEqual(tipText.label, "$20.00")
 ```

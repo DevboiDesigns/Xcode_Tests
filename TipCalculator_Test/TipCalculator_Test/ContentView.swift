@@ -23,6 +23,7 @@ struct ContentView: View {
                 
                 TextField("Enter total", text: $total)
                     .textFieldStyle(.roundedBorder)
+                    .accessibilityLabel("totalTextField")
                 
                 Picker(selection: $tipPercentage) {
                     Text("10%").tag(0.1)
@@ -30,10 +31,12 @@ struct ContentView: View {
                     Text("30%").tag(0.3)
                 } label: {
                     EmptyView()
-                }.pickerStyle(.segmented)
+                }
+                .pickerStyle(.segmented)
+                .accessibilityLabel("tipPercentagePicker")
                 
                 
-                Button("Calculate Tip") {
+                Button {
                     
                     message = ""
                     tip = ""
@@ -60,15 +63,22 @@ struct ContentView: View {
                     }
                     
                     
-                }.padding(.top, 20)
+                } label: {
+                    Text("Calculate Tip")
+                        .accessibilityLabel("calculateTipButton")
+                }
+                .padding(.top, 20)
+                
                 
                 Text(message)
                     .padding(.top, 50)
+                    .accessibilityLabel("messageText")
                 
                 Spacer()
                 
                 Text(tip ?? "")
                     .font(.system(size: 54))
+                    .accessibilityLabel("tipText")
                 
                 Spacer()
                     .navigationTitle("Tip Calculator")
