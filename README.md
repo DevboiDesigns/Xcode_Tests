@@ -1,6 +1,7 @@
 # Unit Testing
 * TDD
 * performed in memory - doesnt need acess to network & database
+* should be able to run tests in any order 
 
 ## Helpful links
 * [hackr](https://hackr.io/blog/types-of-software-testing)
@@ -58,3 +59,45 @@
 
 #### Benchmarking
 * the practice of comparing business process and performance metrics to industry bests and best practices from other companies
+
+
+# Setup
+* add new target - Unit testing and UI testing 
+* function naming convention `test_`
+* name will generate a diamond with play button next to test function 
+
+```swift
+func test_add_two_numbers() {
+        
+        let result = 3 + 5
+        
+        // assert result of value
+        XCTAssertEqual(result, 8)
+        
+}
+```
+
+* have descriptive test names and classes 
+  
+```swift
+class when_calculating_tip_based_on_total_amount: XCTestCase {
+
+    func test_should_calculate_tip_succesfully() {
+        
+    }
+}
+```
+
+* add files/ objects to test target to have access in testing 
+  
+```swift
+class when_calculating_tip_based_on_total_amount: XCTestCase {
+
+    func test_should_calculate_tip_succesfully() {
+        let tipCalculator = TipCalculator()
+        let tip = tipCalculator.calculate(total: 100, tipPercentage: 0.1)
+        XCTAssertEqual(10, tip)
+        
+    }
+}
+```
