@@ -76,7 +76,7 @@ func test_add_two_numbers() {
         
         let result = 3 + 5
         
-        // assert result of value
+        // compares if ==
         XCTAssertEqual(result, 8)
         
 }
