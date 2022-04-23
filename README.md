@@ -1,4 +1,4 @@
-# Unit Testing
+# Xcode Testing
 * TDD
 * performed in memory - doesnt need acess to network & database
 * should be able to run tests in any order 
