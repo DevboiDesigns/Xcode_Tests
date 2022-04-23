@@ -230,7 +230,7 @@ XCTAssertEqual(tipText.label, "$20.00")
 ## Page Object Pattern 
 * represents an entire views accessible elements 
 
-[Files](TipCalculator_Test/TipCalculator_TestUITests/Page Objects)
+[File](TipCalculator_Test/TipCalculator_TestUITests/Page Objects/ContentViewPage.swift)
 
 ```swift
 enum ElementIDs: String {
