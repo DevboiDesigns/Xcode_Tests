@@ -226,3 +226,78 @@ let tipText = app.staticTexts["tipText"]
 let _ = tipText.waitForExistence(timeout: 0.5)
 XCTAssertEqual(tipText.label, "$20.00")
 ```
+
+## Page Object Pattern 
+* represents an entire views accessible elements 
+
+[Files](TipCalculator_Test/TipCalculator_TestUITests/Page Objects)
+
+```swift
+enum ElementIDs: String {
+    case totalTextField = "totalTextField"
+    case tipPercentagePicker = "tipPercentagePicker"
+    case calculateTipButton = "calculateTipButton"
+    case tipText = "tipText"
+    case messageText = "messageText"
+}
+
+class ContentViewPage {
+    
+    var app: XCUIApplication
+    
+    init(app: XCUIApplication) {
+        self.app = app
+    }
+    
+    var totalTextField: XCUIElement {
+        app.textFields[ElementIDs.totalTextField.rawValue]
+    }
+    
+    var calculateTipButton: XCUIElement {
+        app.buttons[ElementIDs.calculateTipButton.rawValue]
+    }
+    
+    var tipPercentagePicker: XCUIElement {
+        app.segmentedControls[ElementIDs.tipPercentagePicker.rawValue]
+    }
+    
+    var tipText: XCUIElement {
+        app.staticTexts[ElementIDs.tipText.rawValue]
+    }
+    
+    var messageText: XCUIElement {
+        app.staticTexts[ElementIDs.messageText.rawValue]
+    }
+}
+```
+
+* config
+
+ ```swift
+ private var app: XCUIApplication!
+    // Page Object Pattern
+ private var contentViewPage: ContentViewPage!
+    
+    //MARK: Config - runs before every test
+    override func setUp() {
+        app = XCUIApplication()
+        contentViewPage = ContentViewPage(app: app)
+        continueAfterFailure = false
+        app.launch()
+    }
+ ``` 
+
+* usage 
+
+```swift
+func test_should_make_sure_that_the_total_textfield_contains_default_value() {
+       
+  //  let totalTextField = app.textFields[ElementIDs.totalTextField.rawValue] 
+    XCTAssertEqual(contentViewPage.totalTextField.value as! String, "Enter total")
+}
+```
+
+## Recording 
+* 🔴 - reording button at bottom of screen
+* attempts to inject the code of your interactions - can be quite buggy
+* can be helpful to find nested elements 
