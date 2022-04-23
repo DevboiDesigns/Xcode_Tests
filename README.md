@@ -310,6 +310,8 @@ func test_should_make_sure_that_the_total_textfield_contains_default_value() {
 * Click on Project File -> Product -> Scheme -> Edit Scheme -> Test -> Code Coverage: gather coverage for 
 * Report Navigator Tab -> click on file -> opens with editor showing exactly what is not tested 
 
+[File](BankApp/BankApp/BankAccount.swift)
+
 ```swift 
 import XCTest
 @testable import BankApp
@@ -323,4 +325,93 @@ class when_deposit_money_into_bank_account: XCTestCase {
     }
 
 }
+```
+
+## Mocking
+* mock server/ auth service 
+* replaces acutal server respones and interaction 
+
+[File](MockingApp/MockingAppUITests/Mocks/MockWebService.swift)
+
+* `@testable import` MockingApp - gives access to whole app without adding to the test targe 
+
+```swift
+protocol NetworkService {
+    func login(username: String, password: String, completion: @escaping (Result<Void, NetworkError>) -> Void)
+}
+```
+
+```swift
+class LoginViewModel: ObservableObject {
+    
+    @Published var username: String = ""
+    @Published var password: String = ""
+    @Published var loginStatus: LoginStatus = .none
+    
+    private var service: NetworkService
+    
+    init(service: NetworkService) {
+        self.service = service
+    }
+    
+    func login() {
+        
+        if username.isEmpty || password.isEmpty {
+            self.loginStatus = .validationFailed
+            return
+        }
+        
+        service.login(username: username, password: password) { result in
+            switch result {
+                case .success():
+                        DispatchQueue.main.async {
+                            self.loginStatus = .authenticated
+                        }
+                case .failure(_):
+                    DispatchQueue.main.async {
+                        self.loginStatus = .denied
+                    }
+            }
+        }
+    }
+    
+}
+```
+
+* `app.launchEnvironment = ["ENV": "TEST"]`
+inject data into view for testing 
+
+```swift
+private var app: XCUIApplication!
+    
+    override func setUp() {
+        app = XCUIApplication()
+        continueAfterFailure = false
+        app.launchEnvironment = ["ENV": "TEST"]
+        app.launch()
+    }
+```
+
+```swift
+class NetworkServiceFactory {
+    
+    static func create() -> NetworkService {
+        let environment = ProcessInfo.processInfo.environment["ENV"]
+        
+        if let environment = environment {
+            if environment == "TEST" {
+                return MockWebSerivce()
+            } else {
+                return Webservice()
+            }
+        } else {
+            return Webservice()
+        }
+    }
+}
+```
+
+**In View**
+```swift
+@StateObject private var loginVM = LoginViewModel(service: NetworkServiceFactory.create())
 ```
