@@ -158,8 +158,7 @@ func test_should_make_sure_that_the_total_textfield_contains_default_value() {
 **add accessibility label** 
 ```swift
 TextField("Enter total", text: $total)
-    .textFieldStyle(.roundedBorder)
-    .accessibilityLabel("totalTextField")
+    .accessibilityIdentifier("totalTextField")
 ```
 
 ## getting access to elements in view
@@ -171,7 +170,9 @@ func test_should_make_sure_20percent_default_tip_option_selected() {
      app.launch()
      
      let tipPercentagePicker = app.segmentedControls["tipPercentagePicker"]
+     // ----------------------------------- access particular button on picker [array of buttons]
      let pickerButton = tipPercentagePicker.buttons.element(boundBy: 1)
+     // ---- check if button is actually selected 
      XCTAssertEqual(pickerButton.label, "20%")
      // checks if currently selected
      XCTAssertTrue(pickerButton.isSelected)

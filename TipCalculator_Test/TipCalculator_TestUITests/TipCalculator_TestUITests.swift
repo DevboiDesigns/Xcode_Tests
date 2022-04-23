@@ -104,7 +104,6 @@ class when_calculate_tip_button_is_pressed: XCTestCase {
         
         let messageText = app.staticTexts["messageText"]
         let _ = messageText.waitForExistence(timeout: 0.5)
-        print("messageText.label: \(messageText.label)")
         
         XCTAssertEqual(messageText.label, "Invalid Input")
         
