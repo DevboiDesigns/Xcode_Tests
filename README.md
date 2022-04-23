@@ -301,3 +301,26 @@ func test_should_make_sure_that_the_total_textfield_contains_default_value() {
 * 🔴 - reording button at bottom of screen
 * attempts to inject the code of your interactions - can be quite buggy
 * can be helpful to find nested elements 
+
+## Code Coverage
+* will show the exact amount of code being tested
+* domain logic should be covered 100%
+
+**Enable**
+* Click on Project File -> Product -> Scheme -> Edit Scheme -> Test -> Code Coverage: gather coverage for 
+* Report Navigator Tab -> click on file -> opens with editor showing exactly what is not tested 
+
+```swift 
+import XCTest
+@testable import BankApp
+
+class when_deposit_money_into_bank_account: XCTestCase {
+    
+    func test_should_deposit_amount_succesfully() {
+        let bankAccount = BankAccount(accountNumber: "1234", amount: 100)
+        bankAccount.deposit(200)
+        XCTAssertEqual(300, bankAccount.balance)
+    }
+
+}
+```
