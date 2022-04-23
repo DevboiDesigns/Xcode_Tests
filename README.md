@@ -137,6 +137,7 @@ class when_calculating_tip_based_on_negative_total_amount: XCTestCase {
 * normally run over night because they take a long time to run 
 
 * `XCUIApplication` - whole app
+* `XCTAssertEqual(tipText.label, "$20.00")` - checks if both parameters are `==`
 
 [Files](TipCalculator_Test/TipCalculator_TestUITests/TipCalculator_TestUITests.swift)
 
@@ -150,7 +151,7 @@ func test_should_make_sure_that_the_total_textfield_contains_default_value() {
        
        let totalTextField = app.textFields["totalTextField"]
        
-       // will check inital value of text field
+       // will check inital value of text field  - compares ==
        XCTAssertEqual(totalTextField.value as! String, "Enter total")
 }
 ```
@@ -161,7 +162,11 @@ TextField("Enter total", text: $total)
     .accessibilityIdentifier("totalTextField")
 ```
 
-## getting access to elements in view
+### Getting access to elements in view
+* `app.textFields["totalTextField"]`
+* `app.buttons["calculateTipButton"]`
+* `app.staticTexts["tipText"]`
+* `tipPercentagePicker.buttons.element(boundBy: 1)` - finds which button is selected from array of picker options 
 
 ```swift
 func test_should_make_sure_20percent_default_tip_option_selected() {
@@ -170,7 +175,7 @@ func test_should_make_sure_20percent_default_tip_option_selected() {
      app.launch()
      
      let tipPercentagePicker = app.segmentedControls["tipPercentagePicker"]
-     // ----------------------------------- access particular button on picker [array of buttons]
+     // ------------------------- access particular button on picker [array of buttons]
      let pickerButton = tipPercentagePicker.buttons.element(boundBy: 1)
      // ---- check if button is actually selected 
      XCTAssertEqual(pickerButton.label, "20%")
@@ -180,7 +185,7 @@ func test_should_make_sure_20percent_default_tip_option_selected() {
 }
 ```
 
-## Config each test
+### Config each test
 
 **runs before every test**
 ```swift
@@ -199,7 +204,10 @@ override func tearDown() {
 }
 ```
 
-## Click events 
+### Click events 
+* `calculateTipButton.tap()`
+* `totalTextField.typeText("100")`
+* `let _ = totalTextField.waitForExistence(timeout: 0.5)` - will wait for load time 
 
 ```swift
 // access element

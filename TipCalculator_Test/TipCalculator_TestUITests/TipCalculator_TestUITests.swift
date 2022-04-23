@@ -40,7 +40,7 @@ class when_content_view_is_shown: XCTestCase {
 }
 
 
-class when_calculate_tip_button_is_pressed: XCTestCase {
+class when_calculate_tip_button_is_pressed_for_valid_input: XCTestCase {
     
     private var app: XCUIApplication!
     
@@ -48,10 +48,6 @@ class when_calculate_tip_button_is_pressed: XCTestCase {
         app = XCUIApplication()
         continueAfterFailure = false
         app.launch()
-        
-    }
-    
-    func test_should_make_sure_tip_is_displayed_on_the_screen() {
         
         // access element
         let totalTextField = app.textFields["totalTextField"]
@@ -64,6 +60,10 @@ class when_calculate_tip_button_is_pressed: XCTestCase {
         //tap button
         calculateTipButton.tap()
         
+    }
+    
+    func test_should_make_sure_tip_is_displayed_on_the_screen() {
+        
         let tipText = app.staticTexts["tipText"]
         // will wait for text to be updated - needed
         let _ = tipText.waitForExistence(timeout: 0.5)
@@ -71,15 +71,35 @@ class when_calculate_tip_button_is_pressed: XCTestCase {
         
     }
     
+}
+
+
+class when_calculate_tip_button_is_pressed_for_invalid_input: XCTestCase {
+    
+    private var app: XCUIApplication!
+    
+    override func setUp() {
+        app = XCUIApplication()
+        continueAfterFailure = false
+        app.launch()
+        
+        // access element
+        let totalTextField = app.textFields["totalTextField"]
+        //tap textfield
+        totalTextField.tap()
+        //type text in text field
+        totalTextField.typeText("-100")
+        // will wait for text to be updated - needed
+        let _ = totalTextField.waitForExistence(timeout: 0.5)
+        //access element
+        let calculateTipButton = app.buttons["calculateTipButton"]
+        //tap button
+        calculateTipButton.tap()
+        
+    }
+    
     
     func test_should_clear_tip_label_for_invalid_input() {
-        
-        let totalTextField = app.textFields["totalTextField"]
-        totalTextField.tap()
-        totalTextField.typeText("-100")
-        let _ = totalTextField.waitForExistence(timeout: 0.5)
-        let calculateTipButton = app.buttons["calculateTipButton"]
-        calculateTipButton.tap()
         
         let tipText = app.staticTexts["tipText"]
         let _ = tipText.waitForExistence(timeout: 0.5)
@@ -89,18 +109,6 @@ class when_calculate_tip_button_is_pressed: XCTestCase {
     }
     
     func test_should_display_error_message_for_invalid_input() {
-        
-        // access element
-        let totalTextField = app.textFields["totalTextField"]
-        //tap textfield
-        totalTextField.tap()
-        //type text in text field
-        totalTextField.typeText("-100")
-        let _ = totalTextField.waitForExistence(timeout: 0.5)
-        //access element
-        let calculateTipButton = app.buttons["calculateTipButton"]
-        //tap button
-        calculateTipButton.tap()
         
         let messageText = app.staticTexts["messageText"]
         let _ = messageText.waitForExistence(timeout: 0.5)
