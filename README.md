@@ -157,7 +157,7 @@ func test_should_make_sure_that_the_total_textfield_contains_default_value() {
 }
 ```
 
-**add accessibility label** 
+**add accessibility identifier** 
 ```swift
 TextField("Enter total", text: $total)
     .accessibilityIdentifier("totalTextField")
