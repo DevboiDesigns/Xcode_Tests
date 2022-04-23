@@ -138,6 +138,7 @@ class when_calculating_tip_based_on_negative_total_amount: XCTestCase {
 
 * `XCUIApplication` - whole app
 * `XCTAssertEqual(tipText.label, "$20.00")` - checks if both parameters are `==`
+* `@testable import MockingApp` - gives access to whole app without adding to the test targe 
 
 [Files](TipCalculator_Test/TipCalculator_TestUITests/TipCalculator_TestUITests.swift)
 
@@ -331,9 +332,6 @@ class when_deposit_money_into_bank_account: XCTestCase {
 * mock server/ auth service 
 * replaces acutal server respones and interaction 
 
-[File](MockingApp/MockingAppUITests/Mocks/MockWebService.swift)
-
-* `@testable import` MockingApp - gives access to whole app without adding to the test targe 
 
 ```swift
 protocol NetworkService {
@@ -392,6 +390,8 @@ private var app: XCUIApplication!
     }
 ```
 
+
+[File](MockingApp/MockingApp/Factories/NetworkServiceFactory.swift)
 ```swift
 class NetworkServiceFactory {
     
@@ -406,6 +406,21 @@ class NetworkServiceFactory {
             }
         } else {
             return Webservice()
+        }
+    }
+}
+```
+
+
+[File](MockingApp/MockingAppUITests/Mocks/MockWebService.swift)
+```swift
+class MockWebSerivce: NetworkService {
+    func login(username: String, password: String, completion: @escaping (Result<Void, NetworkError>) -> Void) {
+        
+        if username == "JohnDoe" && password == "Password" {
+            completion(.success(()))
+        } else {
+            completion(.failure(.notAuthenticated))
         }
     }
 }

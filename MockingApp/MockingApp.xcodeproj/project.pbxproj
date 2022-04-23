@@ -24,8 +24,6 @@
 		0C58CFF4281484AD00229385 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58CFF3281484AD00229385 /* DashboardView.swift */; };
 		0C58CFF5281484AD00229385 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58CFF3281484AD00229385 /* DashboardView.swift */; };
 		0C58CFF6281484AD00229385 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58CFF3281484AD00229385 /* DashboardView.swift */; };
-		0C58D3BC281491FC00229385 /* MockWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58D3BB281491FC00229385 /* MockWebService.swift */; };
-		0C58D3BD281491FC00229385 /* MockWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58D3BB281491FC00229385 /* MockWebService.swift */; };
 		0C58D3BE281491FC00229385 /* MockWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58D3BB281491FC00229385 /* MockWebService.swift */; };
 		0C58D3BF281492F800229385 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58CFED2814846400229385 /* LoginViewModel.swift */; };
 		0C58D3C0281492F900229385 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58CFED2814846400229385 /* LoginViewModel.swift */; };
@@ -34,6 +32,9 @@
 		0C58D3C52814941100229385 /* NetworkServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58D3C42814941100229385 /* NetworkServiceFactory.swift */; };
 		0C58D3C62814941100229385 /* NetworkServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58D3C42814941100229385 /* NetworkServiceFactory.swift */; };
 		0C58D3C72814941100229385 /* NetworkServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58D3C42814941100229385 /* NetworkServiceFactory.swift */; };
+		0C58D3CC281497A700229385 /* LoginPageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58D3C9281497A700229385 /* LoginPageObject.swift */; };
+		0C58D3CE281499A400229385 /* MockWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58D3BB281491FC00229385 /* MockWebService.swift */; };
+		0C58D3CF281499C300229385 /* MockWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C58D3BB281491FC00229385 /* MockWebService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		0C58CFF3281484AD00229385 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		0C58D3BB281491FC00229385 /* MockWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWebService.swift; sourceTree = "<group>"; };
 		0C58D3C42814941100229385 /* NetworkServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceFactory.swift; sourceTree = "<group>"; };
+		0C58D3C9281497A700229385 /* LoginPageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		0C58CFD2281483D400229385 /* MockingAppUITests */ = {
 			isa = PBXGroup;
 			children = (
+				0C58D3C82814979300229385 /* PageObjects */,
 				0C58D3BA281491E000229385 /* Mocks */,
 				0C58CFD3281483D400229385 /* MockingAppUITests.swift */,
 				0C58CFD5281483D400229385 /* MockingAppUITestsLaunchTests.swift */,
@@ -197,6 +200,14 @@
 				0C58D3C42814941100229385 /* NetworkServiceFactory.swift */,
 			);
 			path = Factories;
+			sourceTree = "<group>";
+		};
+		0C58D3C82814979300229385 /* PageObjects */ = {
+			isa = PBXGroup;
+			children = (
+				0C58D3C9281497A700229385 /* LoginPageObject.swift */,
+			);
+			path = PageObjects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,9 +340,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C58D3CF281499C300229385 /* MockWebService.swift in Sources */,
 				0C58CFBB281483D100229385 /* ContentView.swift in Sources */,
 				0C58D3C52814941100229385 /* NetworkServiceFactory.swift in Sources */,
-				0C58D3BC281491FC00229385 /* MockWebService.swift in Sources */,
 				0C58CFF4281484AD00229385 /* DashboardView.swift in Sources */,
 				0C58CFB9281483D100229385 /* MockingAppApp.swift in Sources */,
 				0C58CFE72814843900229385 /* Webservice.swift in Sources */,
@@ -344,7 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C58D3BD281491FC00229385 /* MockWebService.swift in Sources */,
+				0C58D3CE281499A400229385 /* MockWebService.swift in Sources */,
 				0C58D3C62814941100229385 /* NetworkServiceFactory.swift in Sources */,
 				0C58D3C2281492FC00229385 /* Webservice.swift in Sources */,
 				0C58CFF5281484AD00229385 /* DashboardView.swift in Sources */,
@@ -368,6 +379,7 @@
 				0C58CFF6281484AD00229385 /* DashboardView.swift in Sources */,
 				0C58CFE82814843F00229385 /* LoginResponse.swift in Sources */,
 				0C58D3BF281492F800229385 /* LoginViewModel.swift in Sources */,
+				0C58D3CC281497A700229385 /* LoginPageObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

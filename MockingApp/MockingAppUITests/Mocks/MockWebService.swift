@@ -15,8 +15,5 @@ class MockWebSerivce: NetworkService {
         } else {
             completion(.failure(.notAuthenticated))
         }
-        
     }
-    
-    
 }
