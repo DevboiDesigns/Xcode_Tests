@@ -62,6 +62,7 @@
 
 
 # Setup
+* `import XCTest`
 * add new target - Unit testing and UI testing 
 * function naming convention `test_`
 * name will generate a diamond with play button next to test function 
