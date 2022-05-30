@@ -36,6 +36,8 @@ struct ContentView: View {
                     
                     TextField("Password", text: $loginVM.password)
                         .accessibilityIdentifier("passwordTextField")
+
+                        
                     
                     HStack {
                         Spacer()
