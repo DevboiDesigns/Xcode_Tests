@@ -431,3 +431,46 @@ class MockWebSerivce: NetworkService {
 ```swift
 @StateObject private var loginVM = LoginViewModel(service: NetworkServiceFactory.create())
 ```
+
+# Debugging
+
+- set break point on #variable# to watch
+- run + hit breakpoint
+- in variables debug panel: look in self -> #variable#
+- right click + select "watch #variable#"
+- press `cntrl` + `cmd` + `y` to continue stepping through (as many times as needed)
+- Xcode will pause and print every time #variable# has changed
+  - `old value: some`
+  - `new value: none` - red flag
+- Switch 'Debugging' View on left side panel
+- Thread stack will show all code that is running in order of execution
+- step through execution to find where issue is occuring
+
+## Exception Break Point
+
+- click `+` in bottom of break point panel
+- defaults to all, objective c is best for UIKit
+- select `o_objc_exception_throw` in degub panel
+- in console `po $arg1` `po` = print out
+- add action to exception break point: `po $arg1` (alternatively)
+- right click + move breakpoint to user = sets gloablly on all projects
+
+## Print Statments in cosole
+
+- `po self`
+- `po` any variable
+
+## CustomDebugStringConvertible
+
+```swift
+extension dProfileViewModel: CustomDebugStringConvertible {
+
+    var debugDescription: String {
+        return """
+                AppUser: \(self.user)\n
+                Profile: \(self.profile)\n
+                Self: \(self)
+                """
+    }
+}
+```
